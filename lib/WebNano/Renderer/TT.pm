@@ -3,13 +3,13 @@ use strict;
 use warnings;
 
 use Template;
-use Object::Tiny::RW qw/ root _tt global_path INCLUDE_PATH TEMPLATE_EXTENSION/;
+use Object::Tiny::RW qw/ root _tt _global_path INCLUDE_PATH TEMPLATE_EXTENSION/;
 use File::Spec;
 
 sub new {
     my( $class, %args ) = @_;
     my $self = bless { 
-        global_path => [ _to_list( delete $args{INCLUDE_PATH} ) ],
+        _global_path => [ _to_list( delete $args{INCLUDE_PATH} ) ],
         root => delete $args{root},
         TEMPLATE_EXTENSION => delete $args{TEMPLATE_EXTENSION},
     }, $class;
@@ -47,7 +47,7 @@ sub render {
     if( !@input_path ){
         @input_path = ( '' );
     }
-    my @path = @{ $self->global_path };
+    my @path = @{ $self->_global_path };
     for my $root( _to_list( $self->root ) ){
         for my $sub_path( @input_path ){
             if( File::Spec->file_name_is_absolute( $sub_path ) ){
@@ -80,9 +80,7 @@ sub render {
 
 __END__
 
-=head1 NAME
-
-WebNano::Renderer::TT - Template Tookit renderer for WebNano
+# ABSTRACT: A Template Toolkit renderer for WebNano with dynamic search paths
 
 =head1 SYNOPSIS
 
@@ -92,4 +90,28 @@ WebNano::Renderer::TT - Template Tookit renderer for WebNano
     $renderer->render( template => 'template.tt', search_path => [ 'subdir1', 'subdir2' ], output => \$out );
 
 =head1 DESCRIPTION
+
+This is experimental Template Tookit renderer for L<WebNano>.  When looking for
+a template file it scans a cartesian product of static set of paths provided 
+at instance creation time and stored in the C<root> attribute and a dynamic
+set provided to the C<render> method in the C<search_path> attribute.
+
+=head1 ATTRIBUTES
+
+=head2 root
+
+=head2 INCLUDE_PATH
+
+A mechanism to provide the serach path directly sidestepping the dynamic calculations.
+
+=head2 TEMPLATE_EXTENSION
+
+Postfix added to action name to form the template name ( for example 'edit.tt'
+from action 'edit' and TEMPLATE_EXTENSION 'tt' ).
+
+=head1 METHODS
+
+=head2 render
+
+=head2 new
 
