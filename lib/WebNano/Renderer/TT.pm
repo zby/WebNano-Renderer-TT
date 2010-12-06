@@ -48,8 +48,8 @@ sub render {
         @input_path = ( '' );
     }
     my @path = @{ $self->_global_path };
-    for my $root( _to_list( $self->root ) ){
-        for my $sub_path( @input_path ){
+    for my $sub_path( @input_path ){
+        for my $root( _to_list( $self->root ) ){
             if( File::Spec->file_name_is_absolute( $sub_path ) ){
                 push @path, $sub_path;
             }
