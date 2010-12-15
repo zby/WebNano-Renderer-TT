@@ -91,10 +91,15 @@ __END__
 
 =head1 DESCRIPTION
 
-This is experimental Template Tookit renderer for L<WebNano>.  When looking for
+This is experimental Template Tookit dynamic renderer for L<WebNano>.
+Please note that you can use Template Tookit directly in WebNano without this module,
+what this module adds is way to search for the templates that depends on the
+controller.
+When looking for
 a template file it scans a cartesian product of static set of paths provided 
 at instance creation time and stored in the C<root> attribute and a dynamic
-set provided to the C<render> method in the C<search_path> attribute.
+set provided to the C<render> method in the C<search_path> attribute.  Additionally it 
+also scans the C<INCLUDE_PATH> in a more traditional and non-dynamic way.
 
 =head1 ATTRIBUTES
 
@@ -103,6 +108,9 @@ set provided to the C<render> method in the C<search_path> attribute.
 =head2 INCLUDE_PATH
 
 A mechanism to provide the serach path directly sidestepping the dynamic calculations.
+
+Templates that are to be found in C<INCLUDE_PATH> are universal - i.e. can be C<INCLUDE>d 
+everywhere.
 
 =head2 TEMPLATE_EXTENSION
 
