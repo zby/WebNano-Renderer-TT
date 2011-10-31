@@ -86,8 +86,7 @@ __END__
 
     use WebNano::Renderer::TT;
     $renderer = WebNano::Renderer::TT->new( root => [ 't/data/tt1', 't/data/tt2' ] );
-    $out = '';
-    $renderer->render( template => 'template.tt', search_path => [ 'subdir1', 'subdir2' ], output => \$out );
+    my $out = $renderer->render( template => 'template.tt', search_path => [ 'subdir1', 'subdir2' ] );
 
 =head1 DESCRIPTION
 

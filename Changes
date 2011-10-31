@@ -6,4 +6,5 @@ Revision history for WebNano::Renderer::TT
     Packaging fixes.
     Depth-first template search.
 {{$NEXT}}
-
+    Doc fix
+    
