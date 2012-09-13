@@ -106,7 +106,7 @@ also scans the C<INCLUDE_PATH> in a more traditional and non-dynamic way.
 
 =head2 INCLUDE_PATH
 
-A mechanism to provide the serach path directly sidestepping the dynamic calculations.
+A mechanism to provide the search path directly sidestepping the dynamic calculations.
 
 Templates that are to be found in C<INCLUDE_PATH> are universal - i.e. can be C<INCLUDE>d 
 everywhere.
